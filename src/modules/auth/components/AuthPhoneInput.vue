@@ -1,7 +1,7 @@
 <script setup lang="ts">
 import { onMounted, ref } from 'vue'
 import BasePhoneInput from '@shared/components/form/BasePhoneInput.vue'
-import { countryService } from '@shared/api/country.service'
+import { countryService } from '@modules/auth/services/country.service'
 import { fallbackPhoneCountries } from '@shared/utils/phone'
 import type { PhoneCountry } from '@shared/utils/phone'
 

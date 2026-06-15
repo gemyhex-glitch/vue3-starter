@@ -5,7 +5,7 @@ import Aura from '@primeuix/themes/aura'
 import { configure } from 'vee-validate'
 import { router } from '@app/router'
 import { i18n } from '@app/plugins/i18n'
-import { attachApiInterceptors } from '@shared/api/interceptors'
+import { attachApiInterceptors } from '@shared/api/client'
 import { useLocaleStore } from '@stores/locale.store'
 import { useThemeStore } from '@stores/theme.store'
 
