@@ -6,6 +6,7 @@ export interface TableColumn {
   key: string
   label: string
   sortable?: boolean
+  sortType?: 'string' | 'number' | 'date'
 }
 
 export interface TableFilter {

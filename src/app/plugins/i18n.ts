@@ -35,5 +35,3 @@ export async function loadLocaleMessages(locale: AvailableLocale): Promise<void>
   i18n.global.setLocaleMessage(locale, messages.default)
   loadedLocales.add(locale)
 }
-
-void loadLocaleMessages(initialLocale)

@@ -5,11 +5,11 @@ import Aura from '@primeuix/themes/aura'
 import { configure } from 'vee-validate'
 import { router } from '@app/router'
 import { i18n } from '@app/plugins/i18n'
-import { attachApiInterceptors } from '@shared/api/client'
+import { attachApiInterceptors } from '@shared/api/interceptors'
 import { useLocaleStore } from '@stores/locale.store'
 import { useThemeStore } from '@stores/theme.store'
 
-export function installAppProviders(app: App): void {
+export async function installAppProviders(app: App): Promise<void> {
   const pinia = createPinia()
 
   app.use(pinia)
@@ -35,5 +35,5 @@ export function installAppProviders(app: App): void {
   attachApiInterceptors()
 
   useThemeStore().initialize()
-  void useLocaleStore().initialize()
+  await useLocaleStore().initialize()
 }

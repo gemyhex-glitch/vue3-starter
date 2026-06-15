@@ -78,7 +78,7 @@ async function submitEmailLogin(payload: LoginPayload): Promise<void> {
 }
 
 async function submitPhoneLogin(payload: LoginPayload): Promise<void> {
-  await authStore.login(payload)
+  await authStore.requestOtpLogin(payload)
   otpError.value = ''
   pendingOtpPhone.value = payload.phone ?? ''
 }

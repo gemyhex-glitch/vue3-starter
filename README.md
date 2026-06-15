@@ -74,7 +74,7 @@ The goal is a clean modular structure without over-engineering.
 - [x] Review locale/theme/layout stores and keep only state that is valuable for a starter.
 - [x] Guard store initialization where actions register watchers.
 - [x] Remove unnecessary layout remounting from `App.vue` unless it is required.
-- [ ] Normalize API response typing at the service boundary.
+- [x] Normalize API response typing at the service boundary.
 - [x] Rename misleading API setup names, such as auth interceptor setup that also installs toast handling.
 
 ### Styling Cleanup
@@ -134,7 +134,7 @@ The goal is a clean modular structure without over-engineering.
 - [x] Add response interceptors.
 - [x] Add token attachment and 401 handling.
 - [x] Add unified error handling.
-- [x] Add request cancellation helper.
+- [x] Split API client, interceptors, error normalization, and error toast handling.
 
 ### 5. Authentication
 

@@ -40,7 +40,7 @@ const supportId = computed(() => (props.id ? `${props.id}-support` : undefined))
 const availableCountries = computed(() =>
   props.countries?.length ? props.countries : fallbackCountries,
 )
-const maxNationalLength = computed(() => Math.min(selectedCountry.value.nationalMax, 9))
+const maxNationalLength = computed(() => selectedCountry.value.nationalMax)
 const isInvalid = computed(() => Boolean(props.error))
 function getCountryInitials(countryName: string): string {
   return countryName

@@ -84,11 +84,10 @@ const displayedRows = computed(() => {
 
   if (sort.value) {
     const { key, direction } = sort.value
+    const column = props.columns.find((item) => item.key === key)
 
     rows.sort((leftRow, rightRow) => {
-      const leftValue = formatCellValue(leftRow[key])
-      const rightValue = formatCellValue(rightRow[key])
-      const order = leftValue.localeCompare(rightValue)
+      const order = compareCellValues(leftRow[key], rightRow[key], column?.sortType)
 
       return direction === 'asc' ? order : -order
     })
@@ -113,6 +112,25 @@ function formatCellValue(value: unknown): string {
   if (value instanceof Date) return value.toISOString()
 
   return ''
+}
+
+function compareCellValues(
+  leftValue: unknown,
+  rightValue: unknown,
+  sortType: TableColumn['sortType'] = 'string',
+): number {
+  if (sortType === 'number') {
+    return Number(leftValue ?? 0) - Number(rightValue ?? 0)
+  }
+
+  if (sortType === 'date') {
+    return (
+      new Date(formatCellValue(leftValue)).getTime() -
+      new Date(formatCellValue(rightValue)).getTime()
+    )
+  }
+
+  return formatCellValue(leftValue).localeCompare(formatCellValue(rightValue))
 }
 
 function updateFilter(key: string, value: string | number): void {

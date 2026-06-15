@@ -3,7 +3,9 @@ import type { User } from '@models/user/model'
 import type { ApiResponse } from '@shared/types/api'
 
 export const profileService = {
-  getProfile() {
-    return apiClient.get<ApiResponse<User>>('/details/profile')
+  async getProfile(): Promise<User> {
+    const response = await apiClient.get<ApiResponse<User>>('/details/profile')
+
+    return response.data.data
   },
 }

@@ -6,8 +6,7 @@ import '@/assets/styles/main.css'
 
 const app = createApp(App)
 
-installAppProviders(app)
-
-void router.isReady().then(() => {
+void installAppProviders(app).then(async () => {
+  await router.isReady()
   app.mount('#app')
 })

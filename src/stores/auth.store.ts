@@ -48,8 +48,20 @@ export const useAuthStore = defineStore('auth', () => {
     isLoading.value = true
 
     try {
-      const response = await authService.signIn(payload)
-      applySession(response.data.data)
+      const session = await authService.signIn(payload)
+      applySession(session)
+    } finally {
+      isLoading.value = false
+    }
+  }
+
+  async function requestOtpLogin(payload: LoginPayload): Promise<void> {
+    isLoading.value = true
+
+    try {
+      await authService.signIn(payload, {
+        skipAuthRedirect: true,
+      })
     } finally {
       isLoading.value = false
     }
@@ -59,8 +71,8 @@ export const useAuthStore = defineStore('auth', () => {
     isLoading.value = true
 
     try {
-      const response = await authService.signUp(payload)
-      applySession(response.data.data)
+      const session = await authService.signUp(payload)
+      applySession(session)
     } finally {
       isLoading.value = false
     }
@@ -70,15 +82,19 @@ export const useAuthStore = defineStore('auth', () => {
     isLoading.value = true
 
     try {
-      const response = await authService.sendOtp(payload)
-      applySession(response.data.data)
+      const session = await authService.sendOtp(payload, {
+        suppressErrorToast: true,
+      })
+      applySession(session)
     } finally {
       isLoading.value = false
     }
   }
 
   async function resendCode(payload: ResendCodePayload): Promise<void> {
-    await authService.resendCode(payload)
+    await authService.resendCode(payload, {
+      suppressErrorToast: true,
+    })
   }
 
   async function fetchProfile(force = false): Promise<void> {
@@ -97,8 +113,8 @@ export const useAuthStore = defineStore('auth', () => {
     isProfileLoading.value = true
     profileRequest = profileService
       .getProfile()
-      .then((response) => {
-        user.value = response.data.data
+      .then((profile) => {
+        user.value = profile
       })
       .finally(() => {
         isProfileLoading.value = false
@@ -124,6 +140,7 @@ export const useAuthStore = defineStore('auth', () => {
     isProfileLoading,
     isAuthenticated,
     login,
+    requestOtpLogin,
     signup,
     verifyOtp,
     resendCode,

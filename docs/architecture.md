@@ -38,7 +38,9 @@ navigation modes.
 
 ## Authentication Flow
 
-Auth tokens are managed through `tokenService`, which is the storage boundary for the access token. Axios request interceptors inject the access token. Response interceptors clear the token and redirect to `/auth` on protected-route `401` responses. Public auth endpoints such as login, register, verify, and password reset still use global error toasts, but they do not trigger another auth redirect.
+Auth tokens are managed through `tokenService`, which is the storage boundary for the access token. `apiClient` owns only Axios client configuration. API interceptors live beside it and attach the access token, normalize transport errors, trigger app-level redirects, and show global error toasts. Public auth endpoints such as login, register, verify, and password reset do not trigger another auth redirect. Expected workflow errors can opt out of global toasts per request.
+
+Phone login requests an OTP without applying any returned session to the auth store. The user becomes authenticated only after OTP verification returns a session.
 
 Login and signup are composed in one route-level page at `/auth`. The page owns only mode, redirect, and OTP orchestration. Form validation and payload mapping live in `modules/auth/components`. Auth UI state is not exposed in the URL. Legacy `/login` and `/signup` URLs redirect into the unified auth surface and pass mode through router history state.
 

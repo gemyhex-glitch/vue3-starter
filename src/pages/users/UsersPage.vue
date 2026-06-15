@@ -15,7 +15,7 @@ const columns = computed<TableColumn[]>(() => [
   { key: 'name', label: t('users.columns.user'), sortable: true },
   { key: 'role', label: t('users.columns.role'), sortable: true },
   { key: 'status', label: t('users.columns.status'), sortable: true },
-  { key: 'lastSeenAt', label: t('users.columns.lastSeen'), sortable: true },
+  { key: 'lastSeenAt', label: t('users.columns.lastSeen'), sortable: true, sortType: 'date' },
 ])
 
 const filters = computed(() => [

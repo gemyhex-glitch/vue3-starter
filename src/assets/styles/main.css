@@ -87,21 +87,18 @@ input,
 select,
 textarea,
 a {
-  outline: none;
+  outline-color: transparent;
+  outline-style: solid;
+  outline-width: 2px;
+  outline-offset: 2px;
 }
 
-button:focus,
 button:focus-visible,
-input:focus,
 input:focus-visible,
-select:focus,
 select:focus-visible,
-textarea:focus,
 textarea:focus-visible,
-a:focus,
 a:focus-visible {
-  outline: none;
-  box-shadow: none;
+  outline-color: color-mix(in srgb, var(--color-primary) 72%, transparent);
 }
 
 a {
